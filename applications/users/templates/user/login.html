@@ -1,0 +1,44 @@
+{% extends "common/meeting_base.html" %}
+
+{% block title %}
+    登录
+{% endblock %}
+
+{% block head_stylesheet %}
+    <style type="text/css">
+        body{background-color:#eee;}
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="m-header">
+        登录
+    </div>
+    {% verbatim %}
+    <div ng-app="loginApp" ng-controller="loginCtrl" ng-cloak>
+        <div class="m-simpleLst">
+            <div class="simpleItem f-cf">
+                <label class="label" for="phone">手机号</label>
+                <input ng-model="loginData.phone" class="input input-small" type="text" id="phone"/>
+                <span class="mark u-mark u-mark-code" ng-click="getVerifyCode($event)">{{ getVerifyTxt() }}</span>
+            </div>
+            <div class="simpleItem f-cf">
+                <label class="label" for="code">收到的验证码</label>
+                <input ng-model="loginData.verifyCode" class="input" type="text" id="code"/>
+            </div>
+        </div>
+        <div class="m-btnWrap">
+            <a href="#" class="btn u-btn-main2" ng-click="sendLoginData($event)">确定</a>
+        </div>
+        <p class="m-pmpt">还没注册？<a ng-click="goRegister($event)" class="s-main1">立即注册</a></p>
+    </div>
+
+    {% endverbatim %}
+{% endblock %}
+
+{% block custom_body_script %}
+    <script type="text/javascript" src="/static/meeting_v1/js/controllers/login_app.js"></script>
+
+    <script type="text/javascript" src="/static/meeting_v1/js/services/meeting_config_svc.js"></script>
+    <script type="text/javascript" src="/static/meeting_v1/js/services/meeting_request_svc.js"></script>
+{% endblock %}

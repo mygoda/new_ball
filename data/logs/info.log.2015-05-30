@@ -1,0 +1,8 @@
+INFO 2015-05-29 17:51:18,111 models 33640 4377415680 /Users/xu/Downloads/job/meeting/applications/api/models.py 75 _send send verify code to phone 14567890989 : 【课程预约】231716是您本次身份校验码，切勿告知他人。
+INFO 2015-05-29 17:51:18,112 sms 33640 4377415680 /Users/xu/Downloads/job/meeting/libs/sms.py 69 _send_sms_by_guodu [debug,to 14567890989 send message: 【课程预约】231716是您本次身份校验码，切勿告知他人。]
+INFO 2015-05-29 17:51:42,788 models 33640 4377415680 /Users/xu/Downloads/job/meeting/applications/api/models.py 75 _send send verify code to phone 17890870989 : 【课程预约】380308是您本次身份校验码，切勿告知他人。
+INFO 2015-05-29 17:51:42,789 sms 33640 4377415680 /Users/xu/Downloads/job/meeting/libs/sms.py 69 _send_sms_by_guodu [debug,to 17890870989 send message: 【课程预约】380308是您本次身份校验码，切勿告知他人。]
+INFO 2015-05-30 14:39:30,327 models 41808 4487307264 /Users/xu/Downloads/job/meeting/applications/api/models.py 75 _send send verify code to phone 18614043303 : 【课程预约】247060是您本次身份校验码，切勿告知他人。
+INFO 2015-05-30 14:39:30,328 sms 41808 4487307264 /Users/xu/Downloads/job/meeting/libs/sms.py 76 _send_sms_by_guodu [debug,to 18614043303 send message: 【课程预约】247060是您本次身份校验码，切勿告知他人。]
+INFO 2015-05-30 16:32:54,925 models 43255 4366516224 /Users/xu/Downloads/job/meeting/applications/api/models.py 75 _send send verify code to phone 18614043303 : 【课程预约】441597是您本次身份校验码，切勿告知他人。
+INFO 2015-05-30 16:32:54,926 sms 43255 4366516224 /Users/xu/Downloads/job/meeting/libs/sms.py 76 _send_sms_by_guodu [debug,to 18614043303 send message: 【课程预约】441597是您本次身份校验码，切勿告知他人。]

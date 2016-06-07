@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>我的班级</title>
+	<meta name="format-detection" content="telephone=no">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	
+	<link rel="stylesheet" href="/static/teacher_v1/css/index.css">
+	<link rel="stylesheet" href="/static/teacher_v1/css/footer.css">
+	<link rel="stylesheet" href="/static/users/css/template.css">
+</head>
+<body>
+	<div class="arrange">
+		<div class="listTime tabItem">
+			登录
+		</div>
+	</div>
+
+	<div ng-app="loginApp" ng-controller="loginCtrl">
+		<div class="m-simpleLst">
+		    <div class="simpleItem1 f-cf">
+		        <label class="label" for="name">用 户:</label>
+		        <input ng-model="loginData.name" class="input input-small" type="text" placeholder="输入用户名" id="name"/>
+		    </div>
+		    <div class="simpleItem2 f-cf">
+		        <label class="label" for="password">密 码:</label>
+		        <input ng-model="loginData.verifypassword" class="input" type="password" placeholder="请输入密码" id="password"/>
+		    </div>
+		</div>
+		<div class="m-btnWrap">
+		    <input type="button" href="#" class="btn u-btn-main2" ng-click="sendLoginData($event)" value="确定">
+		</div>
+	</div>
+	
+
+	</div>
+	    <div class="m-footer">
+	        <p class="ctn">由<a class="link" href="#">狠任性团队</a>提供技术支持</p>
+	</div>
+</body>
+
+<script src="/static/teacher_v1/js/angularJS/angular.min.js"></script>
+<script type="text/javascript" src="/static/teacher_v1/js/angularJs/angular-resource.min.js"></script>
+<script src="/static/teacher_v1/js/setRem.js"></script>
+<script src="/static/teacher_v1/js/controllers/teacher_login.js"></script>
+<script type="text/javascript" src="/static/teacher_v1/js/service/teacher_request.js"></script>
+</html>

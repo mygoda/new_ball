@@ -1,0 +1,153 @@
+.sname{
+	background: url(../img/ic-moreinfo.png) no-repeat 13rem  center;
+	width: 100%;
+	height: 3rem;
+	border-bottom: 1px solid  #B3B3B3;
+	line-height: 3rem;
+	text-align: left;
+	padding-left: 1rem;
+}
+.sname a{
+	display: block;
+}
+.test{
+	width: 100%;
+	height: 2.75rem;
+	border-bottom: 1px solid  #B3B3B3;
+	line-height: 2.75rem;
+	text-align: center;
+}
+.tesWrap{
+	width: 100%;
+	height: 4rem;
+	border-bottom: 2px solid  #B3B3B3;
+}
+.tesItem{
+	display: block;
+	width: 100%;
+	height: 2rem;
+	line-height: 2rem;
+	color: #999;
+}
+.tesWrap a{
+	display: block;
+	width: 100%;
+	height: 2rem;
+	line-height: 2rem;
+	margin-left: 1rem;	
+}
+.examName{
+	position: relative;
+	border-bottom: 1px solid #BFBFBF;
+	height: 2rem;
+	font-size: 1rem;
+	line-height: 2rem;
+	margin-left: 1.25rem;
+	margin-top: 2rem;
+	font-family: "微软雅黑";
+}
+.examName input {
+	position: absolute;
+	padding-right: 1.25rem;
+	box-sizing: border-box;
+	text-align: right;
+	width: 100%;
+	left: 0;
+	height: 2rem;
+	line-height: 2rem;
+	font-size: 1rem;
+	border: none;
+	background-color: transparent;
+	color: #666;
+}
+.content{
+	position: relative;
+	margin-left: 1.25rem;
+	height: 3rem;
+	margin-top: 2rem;
+	font-size: 1rem;
+	line-height: 2rem;
+	font-family: "微软雅黑";
+}
+.examType {
+	/*position: relative;*/
+	height: 1.5rem;
+	width: 6rem;
+	font-size: 1rem;
+	line-height: 1.5rem;
+	margin-left: 1rem;
+	margin-top: 1rem;
+	font-family: "微软雅黑";
+}
+
+.scoreSucess h2{
+	display: block;
+	width: 100%;
+	height: 3rem;
+	margin-top: 4rem;
+	color: #999;
+	text-align: center;  
+}
+
+.m-simpleLst {
+  box-sizing: border-box;
+  padding: 0 .75rem;
+  margin-top: 2rem;
+  /*border-top: 2px solid pink;*/
+  /*border-bottom: 2px solid #ebebeb;*/
+}
+.m-simpleLst .simpleItem1{
+	width: 100%;
+	height: 2.25rem;
+	line-height: 2.25rem;
+ 	border-bottom: 2px solid #B8B8B8;
+	/*background-color: red;*/
+	margin-bottom: 1rem;
+	outline:medium;
+}
+.m-simpleLst .simpleItem2{
+	width: 100%;
+	line-height: 2.25rem;
+	margin-bottom: 1rem;
+ 	border-bottom: 2px solid #B8B8B8;
+	height: 2.25rem;
+	/*background-color: blue;*/
+	outline:medium;
+}
+.m-simpleLst .input {
+	width: 80%;
+	box-sizing: border-box;
+	text-align: right;
+	height: 2.25rem;
+	line-height: 2.25rem;
+	font-size: .7rem;
+	border: none;
+	background-color: transparent;
+	color: #666;
+}
+
+.m-btnWrap {
+  position: relative;
+  margin: 1.75rem 0;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.m-btnWrap .btn {
+  box-sizing: border-box;
+  width: 100%;
+  height: 2.2rem;
+  line-height: 2.2rem;
+  border-radius: .2rem;
+  font-size: .8rem;
+}
+.u-btn-main2 {
+  display: inline-block;
+  padding: 0 1.1rem;
+  background-color: #0db14b;
+  color: #fff;
+  height: 1.65rem;
+  line-height: 1.65rem;
+  text-align: center;
+  border-radius: .15rem;
+}

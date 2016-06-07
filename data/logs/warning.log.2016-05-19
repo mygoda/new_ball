@@ -1,0 +1,1 @@
+WARNING 2015-12-13 12:02:51,468 base 10406 123145319129088 /Users/tao-xu/.virtualenvs/test_vcenter/lib/python2.7/site-packages/django/core/handlers/base.py 145 get_response Not Found: /favicon.ico

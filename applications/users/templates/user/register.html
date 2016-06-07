@@ -1,0 +1,69 @@
+{% extends "common/meeting_base.html" %}
+
+{% block title %}
+    填写注册信息
+{% endblock %}
+
+{% block head_stylesheet %}
+    <style type="text/css">
+        body{background-color:#eee;}
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="m-header">
+        填写注册信息
+    </div>
+    {% verbatim %}
+    <div ng-app="registerApp" ng-controller="registerCtrl" ng-cloak>
+        <div class="m-simpleLst">
+            <div class="simpleItem f-cf">
+                <label class="label" for="name">姓名</label>
+                <input ng-model="user.username" class="input" type="text" id="name"/>
+            </div>
+            <div class="simpleItem f-cf">
+                <label class="label" for="sex">性别</label>
+                <label class="radioWrap" for=""><input type="radio" ng-model="user.gender" value="1"/>女</label>
+                <label class="radioWrap" for=""><input type="radio" ng-model="user.gender" value="0"/>男</label>
+            </div>
+            <div class="simpleItem f-cf">
+                <label class="label" for="phone">手机号</label>
+                <input ng-model="user.phone" class="input input-small" type="text" id="phone"/>
+                <span class="mark u-mark u-mark-code" ng-click="getVerifyCode($event)">{{ getVerifyTxt() }}</span>
+            </div>
+            <div class="simpleItem f-cf">
+                <label class="label" for="code">收到的验证码</label>
+                <input ng-model="user.code" class="input" type="text" id="code"/>
+            </div>
+            <div class="simpleItem f-dn f-cf">
+                <label class="label" for="name">学员号</label>
+                <input ng-model="user.student_no" class="input" type="text" id="name"/>
+            </div>
+
+            <div class="simpleItem f-dn f-cf">
+                <label class="label" for="city">城市</label>
+                <input ng-model="user.city" class="input" type="text" id="city"/>
+            </div>
+            <div class="simpleItem f-dn f-cf">
+                <label class="label" for="company">公司</label>
+                <input ng-model="user.company" class="input" type="text" id="company"/>
+            </div>
+            <div class="simpleItem f-dn f-cf">
+                <label class="label" for="position">职务</label>
+                <input ng-model="user.position" class="input" type="text" id="position"/>
+            </div>
+        </div>
+        <div class="m-btnWrap">
+            <a href="#" class="btn u-btn-main2" ng-click="saveData($event)">提交注册信息</a>
+        </div>
+        <p class="m-pmpt">已注册，<a ng-click="goLogin($event)" href="/users/login/" class="s-main1">立即登录</a></p>
+    </div>
+    {% endverbatim %}
+{% endblock %}
+
+{% block custom_body_script %}
+    <script type="text/javascript" src="/static/meeting_v1/js/controllers/register_app.js"></script>
+
+    <script type="text/javascript" src="/static/meeting_v1/js/services/meeting_config_svc.js"></script>
+    <script type="text/javascript" src="/static/meeting_v1/js/services/meeting_request_svc.js"></script>
+{% endblock %}

@@ -1,0 +1,14 @@
+INFO 2015-06-04 12:45:26,609 models 59010 4457930752 /Users/xu/Downloads/job/meeting/applications/api/models.py 75 _send send verify code to phone 13040508765 : 【课程预约】255748是您本次身份校验码，切勿告知他人。
+INFO 2015-06-04 12:45:26,611 sms 59010 4457930752 /Users/xu/Downloads/job/meeting/libs/sms.py 76 _send_sms_by_guodu [debug,to 13040508765 send message: 【课程预约】255748是您本次身份校验码，切勿告知他人。]
+INFO 2015-06-04 12:46:02,601 models 59010 4457930752 /Users/xu/Downloads/job/meeting/applications/api/models.py 75 _send send verify code to phone 18909008900 : 【课程预约】331229是您本次身份校验码，切勿告知他人。
+INFO 2015-06-04 12:46:02,604 sms 59010 4457930752 /Users/xu/Downloads/job/meeting/libs/sms.py 76 _send_sms_by_guodu [debug,to 18909008900 send message: 【课程预约】331229是您本次身份校验码，切勿告知他人。]
+INFO 2015-06-04 12:50:19,901 models 59010 4457930752 /Users/xu/Downloads/job/meeting/applications/api/models.py 75 _send send verify code to phone 18909008900 : 【课程预约】416334是您本次身份校验码，切勿告知他人。
+INFO 2015-06-04 12:50:19,904 sms 59010 4457930752 /Users/xu/Downloads/job/meeting/libs/sms.py 76 _send_sms_by_guodu [debug,to 18909008900 send message: 【课程预约】416334是您本次身份校验码，切勿告知他人。]
+INFO 2015-06-04 14:53:48,230 models 60095 4443381760 /Users/xu/Downloads/job/meeting/applications/api/models.py 75 _send send verify code to phone 13200890087 : 【课程预约】470096是您本次身份校验码，切勿告知他人。
+INFO 2015-06-04 14:53:48,231 sms 60095 4443381760 /Users/xu/Downloads/job/meeting/libs/sms.py 76 _send_sms_by_guodu [debug,to 13200890087 send message: 【课程预约】470096是您本次身份校验码，切勿告知他人。]
+INFO 2015-06-04 15:08:34,926 models 60138 4385603584 /Users/xu/Downloads/job/meeting/applications/api/models.py 75 _send send verify code to phone 18118163530 : 【课程预约】088872是您本次身份校验码，切勿告知他人。
+INFO 2015-06-04 15:08:34,927 sms 60138 4385603584 /Users/xu/Downloads/job/meeting/libs/sms.py 76 _send_sms_by_guodu [debug,to 18118163530 send message: 【课程预约】088872是您本次身份校验码，切勿告知他人。]
+INFO 2015-06-04 15:09:54,498 models 60138 4385603584 /Users/xu/Downloads/job/meeting/applications/api/models.py 75 _send send verify code to phone 13200890087 : 【课程预约】536971是您本次身份校验码，切勿告知他人。
+INFO 2015-06-04 15:09:54,499 sms 60138 4385603584 /Users/xu/Downloads/job/meeting/libs/sms.py 76 _send_sms_by_guodu [debug,to 13200890087 send message: 【课程预约】536971是您本次身份校验码，切勿告知他人。]
+INFO 2015-06-04 15:22:16,986 models 60210 4577710080 /Users/xu/Downloads/job/meeting/applications/api/models.py 75 _send send verify code to phone 18665322282 : 【课程预约】587387是您本次身份校验码，切勿告知他人。
+INFO 2015-06-04 15:22:16,990 sms 60210 4577710080 /Users/xu/Downloads/job/meeting/libs/sms.py 76 _send_sms_by_guodu [debug,to 18665322282 send message: 【课程预约】587387是您本次身份校验码，切勿告知他人。]

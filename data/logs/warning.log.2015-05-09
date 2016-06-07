@@ -1,0 +1,1 @@
+WARNING 2015-05-09 13:41:19,914 base 22434 4479807488 /Users/xu/.virtualenvs/meeting/lib/python2.7/site-packages/django/core/handlers/base.py 145 get_response Not Found: /favicon.ico

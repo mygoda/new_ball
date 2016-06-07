@@ -1,0 +1,4 @@
+WARNING 2015-04-27 14:53:22,392 base 7361 4595294208 /Users/xu/.virtualenvs/meeting/lib/python2.7/site-packages/django/core/handlers/base.py 145 get_response Not Found: /admin/order/trade/add/None/
+WARNING 2015-04-28 10:47:58,179 base 8702 4334907392 /Users/xu/.virtualenvs/meeting/lib/python2.7/site-packages/django/core/handlers/base.py 145 get_response Not Found: /api/shops/
+WARNING 2015-04-28 14:08:22,351 base 12000 4487540736 /Users/xu/.virtualenvs/meeting/lib/python2.7/site-packages/django/core/handlers/base.py 145 get_response Not Found: /admin/order/trade/add/None/
+WARNING 2015-04-29 10:09:47,799 base 1991 4585758720 /Users/xu/.virtualenvs/meeting/lib/python2.7/site-packages/django/core/handlers/base.py 145 get_response Not Found: /favicon.ico

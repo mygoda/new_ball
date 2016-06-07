@@ -1,0 +1,8 @@
+WARNING 2016-06-06 11:32:25,531 base 77039 123145310715904 /Users/tao-xu/.virtualenvs/test_vcenter/lib/python2.7/site-packages/django/core/handlers/base.py 145 get_response Not Found: /favicon.ico
+WARNING 2016-06-06 13:41:18,512 base 97631 123145310715904 /Users/tao-xu/.virtualenvs/test_vcenter/lib/python2.7/site-packages/django/core/handlers/base.py 145 get_response Not Found: /favicon.ico
+WARNING 2016-06-06 16:39:32,766 base 8521 123145310715904 /Users/tao-xu/.virtualenvs/test_vcenter/lib/python2.7/site-packages/django/core/handlers/base.py 145 get_response Not Found: /users/login/
+WARNING 2016-06-06 23:36:10,332 base 27607 123145310715904 /Users/tao-xu/.virtualenvs/test_vcenter/lib/python2.7/site-packages/django/core/handlers/base.py 145 get_response Not Found: /favicon.ico
+WARNING 2016-06-07 09:15:32,731 csrf 34408 123145310715904 /Users/tao-xu/.virtualenvs/test_vcenter/lib/python2.7/site-packages/django/middleware/csrf.py 99 _reject Forbidden (CSRF cookie not set.): /login/
+WARNING 2016-06-07 09:15:54,150 csrf 34408 123145310715904 /Users/tao-xu/.virtualenvs/test_vcenter/lib/python2.7/site-packages/django/middleware/csrf.py 99 _reject Forbidden (CSRF cookie not set.): /login/
+WARNING 2016-06-07 10:18:02,466 base 38016 123145314922496 /Users/tao-xu/.virtualenvs/test_vcenter/lib/python2.7/site-packages/django/core/handlers/base.py 145 get_response Not Found: /users/login/
+WARNING 2016-06-07 10:18:15,878 base 38016 123145314922496 /Users/tao-xu/.virtualenvs/test_vcenter/lib/python2.7/site-packages/django/core/handlers/base.py 145 get_response Not Found: /users/login/

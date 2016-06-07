@@ -1,0 +1,10 @@
+WARNING 2015-04-23 17:18:47,359 base 92874 4605026304 /Users/xu/.virtualenvs/meeting/lib/python2.7/site-packages/django/core/handlers/base.py 145 get_response Not Found: /favicon.ico
+WARNING 2015-04-23 21:28:48,779 base 680 4416483328 /Users/xu/.virtualenvs/meeting/lib/python2.7/site-packages/django/core/handlers/base.py 145 get_response Not Found: /favicon.ico
+WARNING 2015-04-24 17:02:27,050 base 2292 4452241408 /Users/xu/.virtualenvs/meeting/lib/python2.7/site-packages/django/core/handlers/base.py 145 get_response Not Found: /admin/meeting/meeting/add/None/
+WARNING 2015-04-24 17:03:10,013 base 2292 4452241408 /Users/xu/.virtualenvs/meeting/lib/python2.7/site-packages/django/core/handlers/base.py 145 get_response Not Found: /admin/order/trade/add/None/
+WARNING 2015-04-24 17:05:52,889 base 2292 4452241408 /Users/xu/.virtualenvs/meeting/lib/python2.7/site-packages/django/core/handlers/base.py 145 get_response Not Found: /admin/order/trade/add/None/
+WARNING 2015-04-25 10:03:11,945 base 3485 4529291264 /Users/xu/.virtualenvs/meeting/lib/python2.7/site-packages/django/core/handlers/base.py 145 get_response Not Found: /admin/order/trade/add/None/
+WARNING 2015-04-25 13:42:26,041 base 4534 4387442688 /Users/xu/.virtualenvs/meeting/lib/python2.7/site-packages/django/core/handlers/base.py 145 get_response Not Found: /admin/order/trade/add/None/
+WARNING 2015-04-25 13:53:59,209 base 4553 4435980288 /Users/xu/.virtualenvs/meeting/lib/python2.7/site-packages/django/core/handlers/base.py 145 get_response Not Found: /admin/order/trade/add/None/
+WARNING 2015-04-25 14:50:56,560 base 4918 4486361088 /Users/xu/.virtualenvs/meeting/lib/python2.7/site-packages/django/core/handlers/base.py 145 get_response Not Found: /admin/meeting/meeting/add/None/
+WARNING 2015-04-25 14:50:56,732 base 4918 4486361088 /Users/xu/.virtualenvs/meeting/lib/python2.7/site-packages/django/core/handlers/base.py 145 get_response Not Found: /admin/meeting/meeting/add/None/

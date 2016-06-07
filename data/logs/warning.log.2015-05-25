@@ -1,0 +1,1 @@
+WARNING 2015-05-25 15:00:35,275 base 9209 4576169984 /Users/xu/.virtualenvs/fitness/lib/python2.7/site-packages/django/core/handlers/base.py 145 get_response Not Found: /favicon.ico
