@@ -41,7 +41,7 @@ DATABASES = {
         'ENGINE': config.get("db", "engine"),
         'NAME': 'ball',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': config.get("db", "password"),
         'HOST': '127.0.0.1',
         'PORT': '',
     }
