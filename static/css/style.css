@@ -1,0 +1,16 @@
+.avatar {
+    height: 72px;
+    width: 72px;
+}
+
+.img-card {
+    width: 500px;
+}
+
+.easemob-img {
+    max-width: 500px;
+}
+
+.easemob-text  {
+    word-break: break-all;
+}
