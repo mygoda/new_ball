@@ -184,7 +184,6 @@ def login(request):
     password = data.get("password")
     try:
         employee, errmsg = ucenter.employee_login(username, password)
-        print(employee)
         if not employee:
             msg = u"用户名或者密码错误"
             logger.error("login error.error username:%s password:%s error message:%s" % (username, password, errmsg))
