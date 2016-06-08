@@ -88,6 +88,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         user, create = User.objects.get_or_create(username=employee['loginName'])
         if create:
             # 初始化staff
+            print(employee)
             user.department = employee['department']
             user.deptId = employee['deptId']
             user.employee_no = employee['employeeNo']
@@ -95,6 +96,7 @@ class User(AbstractBaseUser, PermissionsMixin):
             user.last_name = employee['lastName']
             user.email = employee['email']
             user.phone = employee['phone']
+            user.save()
         else:
             logging.debug("%s just login" % user.username)
         return user

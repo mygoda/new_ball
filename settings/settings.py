@@ -249,8 +249,8 @@ IMG_HOST = config.get("file", "FILE_HOST")
 
 
 # 基于环境参数 开始
-UCENTER_URL = 'http://10.13.0.101:80/authen'
-UCENTER_SRC = "BSS"
+UCENTER_URL = 'http://10.13.0.101:80/'
+UCENTER_SRC = "ucenter"
 UCENTER_USER = "wenshuo.gao"
 UCENTER_PASSWORD = "P@ssw0rd"
 

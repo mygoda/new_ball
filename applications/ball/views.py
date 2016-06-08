@@ -184,10 +184,10 @@ def login(request):
     password = data.get("password")
     try:
         employee, errmsg = ucenter.employee_login(username, password)
-        print(errmsg)
+        print(employee)
         if not employee:
             msg = u"用户名或者密码错误"
-            logger.error("login error.error username:%s password:%s error message:%s" % (username, password, msg))
+            logger.error("login error.error username:%s password:%s error message:%s" % (username, password, errmsg))
             return json_forbidden_response(msg=msg, json_data={})
         else:
             user = User.update_cds_employee(employee)
