@@ -153,6 +153,10 @@ class Game(models.Model):
         if now > self.start_time:
             # 只要下注时间超过开球时间就不允许
             return False
+
+        if self.success != "unstart":
+            return False
+
         return True
 
     def to_json(self):
