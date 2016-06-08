@@ -193,7 +193,7 @@ def login(request):
             user = User.update_cds_employee(employee)
             return json_success_response(json_data={"user_id": user.id})
     except Exception as e:
-        logger.error("login ucenter catch error%s" % traceback.format_exc())
+        logger.info("login ucenter catch error%s" % traceback.format_exc())
         msg = u"login when catch error"
         return json_error_response(msg=msg, json_data={})
 
