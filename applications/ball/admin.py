@@ -48,6 +48,6 @@ class StatAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Team, TeamAdmin)
-admin.site.register(GameStat)
+admin.site.register(GameStat, StatAdmin)
 admin.site.register(Game, GameAdmin)
 admin.site.register(UserGameShip, UserGameShipAdmin)
