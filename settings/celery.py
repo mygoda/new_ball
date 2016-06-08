@@ -10,7 +10,6 @@ from celery import Celery
 
 import logging
 
-from libs.p2p import get_torrent, get_torrents
 
 logger = logging.getLogger(__name__)
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings.settings')

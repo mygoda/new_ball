@@ -38,6 +38,15 @@ class UserGameShipAdmin(admin.ModelAdmin):
     team_name.short_description = u"下注球队"
 
 
+class StatAdmin(admin.ModelAdmin):
+
+    list_display = ["game_name", "host_win_people", "other_win_people", "host_win_money", "other_win_money", "all_my"]
+
+    def game_name(self, obj):
+        return obj.game.game_name
+    game_name.short_description = u"比赛名称"
+
+
 admin.site.register(Team, TeamAdmin)
 admin.site.register(GameStat)
 admin.site.register(Game, GameAdmin)
