@@ -3,7 +3,7 @@
 
 from __future__ import division, unicode_literals, print_function
 from django.contrib.auth.models import BaseUserManager
-
+import logging
 
 class UserManager(BaseUserManager):
 

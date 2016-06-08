@@ -183,45 +183,15 @@ def login(request):
     username = data.get("username")
     password = data.get("password")
     try:
-        result = ucenter.user_login(username, password)
-        print(result)
-        if result[2]:
+        employee, errmsg = ucenter.employee_login(username, password)
+        print(errmsg)
+        if not employee:
             msg = u"用户名或者密码错误"
             logger.error("login error.error username:%s password:%s error message:%s" % (username, password, msg))
             return json_forbidden_response(msg=msg, json_data={})
         else:
-            customer_return = result[1]
-            user_return = result[0]
-            # gic里contacts_mobile不能为空
-            # gic返回用户相关信息
-            gic_user_email = user_return['email']
-            gic_userid = user_return['id']
-            gic_phone = user_return['phone']
-            gic_username = user_return['username']
-            # 判断用户邮箱是否有效，若无效强制生成有效邮箱（添加@符号）
-            if str(gic_user_email).find('@') == -1:
-                user_email = str(gic_user_email) + '@360.com'
-            else:
-                user_email = gic_user_email
-            logger.info("customer cds return msg:" + json.dumps(customer_return))
-            logger.info("user cds return msg:" + json.dumps(user_return))
-            logger.info("gic_user_email:%s ,gic_userid:%s,gic_phone:%s,gic_username:%s" % (
-                str(gic_user_email), str(gic_userid), str(gic_phone), str(gic_username)))
-            # 判断用户名是否存在，并更新邮箱信息
-
-        user_exists = User.objects.filter(Q(email=user_email) | Q(username=gic_username) | Q(phone=gic_phone)).exists()
-        if not user_exists:
-            # 新建一个
-            user = User.objects.create_user(email=user_email, username=gic_username, phone=gic_phone, password=password)
-            user.save()
-        else:
-            # 让他登录
-            user = User.objects.filter(Q(email=user_email) | Q(username=gic_username) | Q(phone=gic_phone))[0]
-            user.password = password
-            user.username = gic_username
-            user.email = gic_user_email
-            user.save()
-        return json_success_response(json_data={"user_id": user.id})
+            user = User.update_cds_employee(employee)
+            return json_success_response(json_data={"user_id": user.id})
     except Exception as e:
         logger.error("login ucenter catch error%s" % traceback.format_exc())
         msg = u"login when catch error"

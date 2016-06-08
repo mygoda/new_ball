@@ -5,7 +5,7 @@ from __future__ import division, unicode_literals, print_function
 from django.contrib.auth.models import PermissionsMixin, AbstractBaseUser
 from django.db import models
 from applications.users.managers import UserManager
-
+import logging
 
 class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
@@ -23,6 +23,16 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(u"邮箱", max_length=255, default="", blank=True, null=True)
     username = models.CharField(u"用户名", max_length=255, default="", blank=True, null=True)
+
+    employee_no = models.CharField(u"员工号", max_length=32, null=True, blank=True)
+
+    deptId = models.CharField(u"部门id", max_length=32, null=True, blank=True)
+
+    department = models.CharField(u"部门", max_length=32, null=True, blank=True)
+
+    first_name = models.CharField(u"名", max_length=12, null=True, blank=True)
+
+    last_name = models.CharField(u"姓", max_length=12, null=True, blank=True)
 
     # student_no = models.CharField(u"学员号", max_length=128, default='', blank=True, null=True)
 
@@ -67,3 +77,24 @@ class User(AbstractBaseUser, PermissionsMixin):
             return users[0]
         except:
             return None
+
+    @classmethod
+    def update_cds_employee(cls, employee):
+        """同步CDS员工信息，同时更新其对应的部门信息
+        1、增加或更新User
+        2、增加或更新Staff， Staff的Company是CDS， CompnayID可以是hardcode
+        3、返回User
+        """
+        user, create = User.objects.get_or_create(username=employee['loginName'])
+        if create:
+            # 初始化staff
+            user.department = employee['department']
+            user.deptId = employee['deptId']
+            user.employee_no = employee['employeeNo']
+            user.first_name = employee['firstName']
+            user.last_name = employee['lastName']
+            user.email = employee['email']
+            user.phone = employee['phone']
+        else:
+            logging.debug("%s just login" % user.username)
+        return user
