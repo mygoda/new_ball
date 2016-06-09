@@ -154,7 +154,6 @@ def game_list(request, tmp_name=""):
 
 def test(request):
     user = request.user
-    print(request.META.get("HTTP_TOKEN", 0000))
     data = {}
     if user:
         data["a"] = "abc"

@@ -156,7 +156,6 @@ class Game(models.Model):
 
         if self.success != "unstart":
             return False
-        print("*" * 30)
         return True
 
     def to_json(self):
