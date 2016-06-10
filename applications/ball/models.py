@@ -100,9 +100,10 @@ class Game(models.Model):
         if self.extra_goal:
             extra_goal_list = self.extra_goal.split(",")
             if len(extra_goal_list) == 2:
-                return "让%s/%s球" % (extra_goal_list[0], extra_goal_list[1])
+                return "%s%s/%s球" % ("让" if float(extra_goal_list[0]) > 0 else "受", abs(float(extra_goal_list[0])),
+                                     abs(float(extra_goal_list[1])))
             else:
-                return "让%s球" % extra_goal_list[0]
+                return "%s%s球" % ("让" if float(extra_goal_list[0]) > 0 else "受", abs(float(extra_goal_list[0])))
         else:
             return u"无"
 
