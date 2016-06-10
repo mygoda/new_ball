@@ -47,11 +47,11 @@ def bet(request):
             game.other_win_add = game.other_win
             game.equal_win_add = game.equal
 
-        game.success = u"win"
+        # game.success = u"win"
         user_choice_team_id = None
         if user_choice == 0:
             # 战平
-            game.success = "equal"
+            # game.success = "equal"
             win_add = game.equal
             game_stat.equal_win_people += 1
             game_stat.equal_win_money += money
@@ -69,7 +69,6 @@ def bet(request):
             user_choice_team_id = game.other_team.id
             game_stat.other_win_people += 1
             game_stat.other_win_money += 1
-        game.save()
         game_stat.save()
         logger.debug(u"用户%s 在 比赛%s 中压%s元, %s胜利!" % (user.username, game_id, money, user_choice))
 
