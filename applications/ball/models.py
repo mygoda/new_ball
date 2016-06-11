@@ -216,7 +216,6 @@ class UserGameShip(models.Model):
         """
 
         all_money = 0
-        default_water = 1 - float(self.game.default_water) / 100
         if self.game.success not in ["unstart", "playing"]:
             if self.extra_goal:
                 # 存在的情况
@@ -227,15 +226,23 @@ class UserGameShip(models.Model):
                     for extra_goal in extra_goal_list:
                         game_result = self.game.host_point - float(extra_goal) - self.game.other_point  # 是否主队赢了
                         if game_result == 0:
-                            all_money += self.money
+                            if self.user_choice_team == self.game.other_team_id:
+                                # 客队
+                                default_water = abs(1 - float(self.game.other_win) / 100)
+                                all_money += float(self.money) * default_water
+                            else:
+                                default_water = abs(1 - float(self.game.host_win) / 100)
+                                all_money += float(self.money) * default_water
                         elif game_result < 0:
                             # 客队赢了
                             if self.user_choice_team == self.game.other_team_id:
+                                default_water = abs(1 - float(self.game.other_win) / 100)
                                 all_money += float(self.money) + money * float(self.win_odd) * default_water
 
                         else:
                             # 押主队的赢了
                             if self.user_choice_team == self.game.host_team_id:
+                                default_water = abs(1 - float(self.game.host_win) / 100)
                                 all_money += float(self.money) + money * float(self.win_odd) * default_water
                 else:
                     # 就一个让球
@@ -247,11 +254,13 @@ class UserGameShip(models.Model):
                     elif game_result < 0:
                         # 客队赢了
                         if self.user_choice_team == self.game.other_team_id:
+                            default_water = abs(1 - float(self.game.other_win) / 100)
                             all_money += float(self.money) + money * float(self.win_odd) * default_water
 
                     else:
                         # 押主队的赢了
                         if self.user_choice_team == self.game.host_team_id:
+                            default_water = abs(1 - float(self.game.host_win) / 100)
                             all_money += float(self.money) + money * float(self.win_odd) * default_water
             else:
                 # 不存在让球
@@ -260,17 +269,34 @@ class UserGameShip(models.Model):
                 game_result = self.game.host_point - int(extra_goal) - self.game.other_point  # 是否主队赢了
                 if game_result == 0:
                     # 主队, 客队的收益拿回本钱
-                    all_money += self.money
+                    if self.user_choice_team == self.game.other_team_id:
+                        # 客队
+                        default_water = abs(1 - float(self.game.other_win) / 100)
+                        all_money += float(self.money) * default_water
+                    else:
+                        default_water = abs(1 - float(self.game.host_win) / 100)
+                        all_money += float(self.money) * default_water
                 elif game_result < 0:
                     # 客队赢了
                     if self.user_choice_team == self.game.other_team_id:
+                        default_water = abs(1 - float(self.game.other_win) / 100)
                         all_money += float(self.money) + money * float(self.win_odd) * default_water
 
                 else:
                     # 押主队的赢了
                     if self.user_choice_team == self.game.host_team_id:
+                        default_water = abs(1 - float(self.game.host_win) / 100)
                         all_money += float(self.money) + money * float(self.win_odd) * default_water
         return all_money
+
+    @property
+    def oh_money(self):
+        """
+            庄家的钱
+        :return:
+        """
+        user_money = self.user_win - float(self.money)
+        return user_money
 
     @property
     def choice_team(self):
