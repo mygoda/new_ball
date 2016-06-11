@@ -34,7 +34,7 @@ def check_money():
                 user = game_user.user
                 user_get_money = game_user.user_win
                 user.money += user_get_money
-                logger.info("now is %s" % all_my_money)
+                logger.info("now is %s" % game_user.oh_money)
                 all_my_money -= game_user.oh_money
                 user.save()
             else:

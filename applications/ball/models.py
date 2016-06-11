@@ -229,6 +229,7 @@ class UserGameShip(models.Model):
                             if self.user_choice_team == self.game.other_team_id:
                                 # 客队
                                 default_water = abs(1 - float(self.game.other_win) / 100)
+
                                 all_money += float(self.money) * default_water
                             else:
                                 default_water = abs(1 - float(self.game.host_win) / 100)
@@ -250,7 +251,13 @@ class UserGameShip(models.Model):
                     money = float(self.money)
                     game_result = self.game.host_point - int(extra_goal) - self.game.other_point  # 是否主队赢了
                     if game_result == 0:
-                        all_money += self.money
+                        if self.user_choice_team == self.game.other_team_id:
+                            # 客队
+                            default_water = abs(1 - float(self.game.other_win) / 100)
+                            all_money += float(self.money) * default_water
+                        else:
+                            default_water = abs(1 - float(self.game.host_win) / 100)
+                            all_money += float(self.money) * default_water
                     elif game_result < 0:
                         # 客队赢了
                         if self.user_choice_team == self.game.other_team_id:
@@ -296,6 +303,7 @@ class UserGameShip(models.Model):
         :return:
         """
         user_money = self.user_win - float(self.money)
+
         return user_money
 
     @property
