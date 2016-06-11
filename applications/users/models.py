@@ -88,7 +88,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         user, create = User.objects.get_or_create(username=employee['loginName'])
         if create:
             # 初始化staff
-            print(employee)
             user.department = employee['department']
             user.deptId = employee['deptId']
             user.employee_no = employee['employeeNo']
