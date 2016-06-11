@@ -30,7 +30,7 @@ def check_money():
         for game_user in game_users:
             if game_user.user_win > 0:
                 # 该条记录赢钱
-                logger.debug("user:%s win" % game_user.user.id)
+                logger.info("user:%s win" % game_user.user.id)
                 user = game_user.user
                 user_get_money = game_user.user_win
                 user.money += user_get_money
@@ -38,7 +38,7 @@ def check_money():
                 user.save()
             else:
                 all_my_money += game_user.money
-                logger.debug("user:%s not win" % game_user.user.id)
+                logger.info("user:%s not win" % game_user.user.id)
 
             game_user.is_check = True
             game_user.save()
