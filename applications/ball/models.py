@@ -175,6 +175,7 @@ class Game(models.Model):
     def games_to_json(self):
         if self.can_add and self.user_can_odd:
             return self.to_json()
+        return False
 
     def obj_to_json(self):
         return {
