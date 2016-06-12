@@ -26,6 +26,6 @@ def games_api_list(request):
     :return:
     """
     games = Game.objects.filter(user_can_odd=True)
-    games = [game.to_json() for game in games]
+    games = [game.games_to_json() for game in games]
     return json_success_response(json_data={"games": games})
 

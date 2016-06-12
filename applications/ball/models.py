@@ -172,6 +172,10 @@ class Game(models.Model):
             "goal": self.goal_list,
         }
 
+    def games_to_json(self):
+        if self.can_add and self.user_can_odd:
+            return self.to_json()
+
     def obj_to_json(self):
         return {
             "host_team": self.host_team.name,
