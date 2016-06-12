@@ -7,6 +7,6 @@ from settings.const import URL_ID
 from applications.api.views import *
 
 urlpatterns = patterns('',
-    url(r'^games/$', GamesQuerysetView.as_view(), name='games_queryset_view'),
+    url(r'^games/$', games_api_list, name='games_queryset_view'),
 )
 

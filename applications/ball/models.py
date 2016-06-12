@@ -77,6 +77,8 @@ class Game(models.Model):
 
     is_check = models.BooleanField(u"是否结算", default=False)
 
+    user_can_odd = models.BooleanField(u"是否可以下注", default=False)
+
     created_at = models.DateTimeField(u"创建时间", default=datetime.datetime.now)
     update_at = models.DateTimeField(u"更新时间", default=datetime.datetime.now)
 
