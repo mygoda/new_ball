@@ -4,6 +4,36 @@
 from __future__ import division, unicode_literals, print_function
 from django.contrib import admin
 from applications.ball.models import Team, Game, UserGameShip, GameStat
+import datetime
+
+
+def delete_game_ship(modeladmin, request, queryset):
+    for item in queryset:
+        if not item.created_at.date() == datetime.date.today():
+            item.delete()
+delete_game_ship.short_description = u"清除用户下注记录"
+
+
+def delete_user_game(modeladmin, request, queryset):
+    for item in queryset:
+        user = item.user
+        user.money += item.money
+        user.save()
+        item.delete()
+delete_user_game.short_description = u"清空用户下注记录"
+
+
+def update_user_money(modeladmin, request, queryset):
+    user_ids = []
+    for item in queryset:
+        user = item.user
+        if user.id not in user_ids:
+            user.money = 0
+            user.save()
+        user.money -= item.money
+        user_ids.append(user.id)
+        user.save()
+update_user_money.short_description = u"更新用户余额"
 
 
 class TeamAdmin(admin.ModelAdmin):
@@ -24,7 +54,11 @@ class UserGameShipAdmin(admin.ModelAdmin):
 
     list_display = ["username", "game_name", "money", "team_name", "win_odd", "is_check", "created_at"]
 
-    search_fields = ["username", "game__game_name"]
+    list_filter = ["user__username"]
+
+    search_fields = ["user__username", ]
+
+    actions = [delete_user_game]
 
     def username(self, obj):
         return obj.user.username
