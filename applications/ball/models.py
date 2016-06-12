@@ -256,7 +256,7 @@ class UserGameShip(models.Model):
                     # 就一个让球
                     extra_goal = extra_goal_list[0]
                     money = float(self.money)
-                    game_result = self.game.host_point - int(extra_goal) - self.game.other_point  # 是否主队赢了
+                    game_result = self.game.host_point - float(extra_goal) - self.game.other_point  # 是否主队赢了
                     if game_result == 0:
                         if self.user_choice_team == self.game.other_team_id:
                             # 客队
@@ -280,7 +280,7 @@ class UserGameShip(models.Model):
                 # 不存在让球
                 extra_goal = 0
                 money = float(self.money)
-                game_result = self.game.host_point - int(extra_goal) - self.game.other_point  # 是否主队赢了
+                game_result = self.game.host_point - float(extra_goal) - self.game.other_point  # 是否主队赢了
                 if game_result == 0:
                     # 主队, 客队的收益拿回本钱
                     if self.user_choice_team == self.game.other_team_id:
