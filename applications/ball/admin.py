@@ -13,7 +13,7 @@ class TeamAdmin(admin.ModelAdmin):
 
 class GameAdmin(admin.ModelAdmin):
     list_display = ["name", "show_name", "start_time", "success", "extra_goal", "host_win", "other_win", "host_point",
-                    "other_point", "default_water", "is_check", "user_can_odd"]
+                    "other_point", "default_water", "is_check", "user_can_odd", "created_at"]
 
     def show_name(self, obj):
         return obj.game_name
@@ -22,7 +22,9 @@ class GameAdmin(admin.ModelAdmin):
 
 class UserGameShipAdmin(admin.ModelAdmin):
 
-    list_display = ["username", "game_name", "money", "team_name", "win_odd", "is_check"]
+    list_display = ["username", "game_name", "money", "team_name", "win_odd", "is_check", "created_at"]
+
+    search_fields = ["username", "game__game_name"]
 
     def username(self, obj):
         return obj.user.username
@@ -40,7 +42,7 @@ class UserGameShipAdmin(admin.ModelAdmin):
 
 class StatAdmin(admin.ModelAdmin):
 
-    list_display = ["game_name", "host_win_people", "other_win_people", "host_win_money", "other_win_money", "all_my"]
+    list_display = ["game_name", "host_win_people", "other_win_people", "host_win_money", "other_win_money", "all_my", "created_at"]
 
     def game_name(self, obj):
         return obj.game.game_name
