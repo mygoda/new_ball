@@ -38,8 +38,8 @@ def bet(request):
         user = User.objects.get(id=user_id)
         user_choice = int(data.get("is_host", 0))   # 0: 战平 1: 主队, 2 客队
         game = Game.objects.get(id=game_id)
-        if not game.can_add:
-            # 无法下注的情况, 比赛已经开始
+        if not game.can_add or not game.user_can_odd:
+            # 无法下注的情况, 比赛已经开始, 不能下注
             return json_forbidden_response(json_data={}, msg="time_over")
         game_stat_exists = GameStat.objects.filter(game_id=game_id).exists()
         if not game_stat_exists:
