@@ -29,7 +29,9 @@ def bet(request):
     try:
         data = request.POST
         game_id = data.get("game_id")
-        money = int(data.get("money", 0))
+        money = abs(float(data.get("money", 5)))
+        if money < 5:
+            money = 5
         user_id = data.get("user_id", 1)
         user = User.objects.get(id=user_id)
         user_choice = int(data.get("is_host", 0))   # 0: 战平 1: 主队, 2 客队
