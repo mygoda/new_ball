@@ -13,7 +13,7 @@ class TeamAdmin(admin.ModelAdmin):
 
 class GameAdmin(admin.ModelAdmin):
     list_display = ["name", "show_name", "start_time", "success", "extra_goal", "host_win", "other_win", "host_point",
-                    "other_point", "default_water", "is_check"]
+                    "other_point", "default_water", "is_check", "user_can_odd"]
 
     def show_name(self, obj):
         return obj.game_name

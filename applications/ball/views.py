@@ -32,6 +32,8 @@ def bet(request):
         money = abs(float(data.get("money", 5)))
         if money < 5:
             money = 5
+        elif money > 500:
+            money = 500
         user_id = data.get("user_id", 1)
         user = User.objects.get(id=user_id)
         user_choice = int(data.get("is_host", 0))   # 0: 战平 1: 主队, 2 客队
