@@ -50,6 +50,7 @@ class Command(BaseCommand):
                     print(game_stat.all_my)
                     print("user:%s is not win oh my is:%s" % (user.username, user_game.oh_money))
                 user_game.is_check = True
+                user_game.save()
                 game_stat.save()
 
             user.money = user_money
