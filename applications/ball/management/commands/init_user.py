@@ -49,7 +49,7 @@ class Command(BaseCommand):
                         game_stat.all_my -= user_game.oh_money
                     print(game_stat.all_my)
                     print("user:%s is not win oh my is:%s" % (user.username, user_game.oh_money))
-                game_stat.is_check = True
+                user_game.is_check = True
                 game_stat.save()
 
             user.money = user_money
