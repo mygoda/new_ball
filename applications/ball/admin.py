@@ -52,7 +52,8 @@ class GameAdmin(admin.ModelAdmin):
 
 class UserGameShipAdmin(admin.ModelAdmin):
 
-    list_display = ["username", "game_name", "money", "team_name", "win_odd", "is_check", "created_at"]
+    list_display = ["username", "game_name", "game_result", "game_point", "extra_goal", "money", "team_name", "win_odd", "is_check",
+                    "created_at"]
 
     list_filter = ["user__username"]
 
@@ -67,6 +68,17 @@ class UserGameShipAdmin(admin.ModelAdmin):
     def game_name(self, obj):
         return obj.game.game_name
     game_name.short_description = u"比赛名称"
+
+    def game_result(self, obj):
+        if obj.game.success in ["unstart", "playing"]:
+            return u"未开始"
+        else:
+            return u"已结束"
+    game_result.short_description = u"比赛结果"
+
+    def game_point(self, obj):
+        return obj.game.game_point if obj.game else ""
+    game_point.short_description = u"比分"
 
     def team_name(self, obj):
         team = Team.objects.get(id=obj.user_choice_team)
