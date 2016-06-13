@@ -236,21 +236,24 @@ class UserGameShip(models.Model):
                             if self.user_choice_team == self.game.other_team_id:
                                 # 客队
                                 default_water = abs(1 - float(self.game.other_win))
-
+                                default_water = default_water if default_water > 0 else 1 - 0.14
                                 all_money += float(self.money) * default_water
                             else:
                                 default_water = abs(1 - float(self.game.host_win))
+                                default_water = default_water if default_water > 0 else 1 - 0.14
                                 all_money += float(self.money) * default_water
                         elif game_result < 0:
                             # 客队赢了
                             if self.user_choice_team == self.game.other_team_id:
                                 default_water = abs(1 - float(self.game.other_win))
+                                default_water = default_water if default_water > 0 else 1 - 0.14
                                 all_money += float(self.money) + money * float(self.win_odd) * default_water
 
                         else:
                             # 押主队的赢了
                             if self.user_choice_team == self.game.host_team_id:
                                 default_water = abs(1 - float(self.game.host_win))
+                                default_water = default_water if default_water > 0 else 1 - 0.14
                                 all_money += float(self.money) + money * float(self.win_odd) * default_water
                 else:
                     # 就一个让球
@@ -261,20 +264,24 @@ class UserGameShip(models.Model):
                         if self.user_choice_team == self.game.other_team_id:
                             # 客队
                             default_water = abs(1 - float(self.game.other_win))
+                            default_water = default_water if default_water > 0 else 1 - 0.14
                             all_money += float(self.money) * default_water
                         else:
                             default_water = abs(1 - float(self.game.host_win))
+                            default_water = default_water if default_water > 0 else 1 - 0.14
                             all_money += float(self.money) * default_water
                     elif game_result < 0:
                         # 客队赢了
                         if self.user_choice_team == self.game.other_team_id:
                             default_water = abs(1 - float(self.game.other_win))
+                            default_water = default_water if default_water > 0 else 1 - 0.14
                             all_money += float(self.money) + money * float(self.win_odd) * default_water
 
                     else:
                         # 押主队的赢了
                         if self.user_choice_team == self.game.host_team_id:
                             default_water = abs(1 - float(self.game.host_win))
+                            default_water = default_water if default_water > 0 else 1 - 0.14
                             all_money += float(self.money) + money * float(self.win_odd) * default_water
             else:
                 # 不存在让球
@@ -286,20 +293,24 @@ class UserGameShip(models.Model):
                     if self.user_choice_team == self.game.other_team_id:
                         # 客队
                         default_water = abs(1 - float(self.game.other_win))
+                        default_water = default_water if default_water > 0 else 1 - 0.14
                         all_money += float(self.money) * default_water
                     else:
                         default_water = abs(1 - float(self.game.host_win))
+                        default_water = default_water if default_water > 0 else 1 - 0.14
                         all_money += float(self.money) * default_water
                 elif game_result < 0:
                     # 客队赢了
                     if self.user_choice_team == self.game.other_team_id:
                         default_water = abs(1 - float(self.game.other_win))
+                        default_water = default_water if default_water > 0 else 1 - 0.14
                         all_money += float(self.money) + money * float(self.win_odd) * default_water
 
                 else:
                     # 押主队的赢了
                     if self.user_choice_team == self.game.host_team_id:
                         default_water = abs(1 - float(self.game.host_win))
+                        default_water = default_water if default_water > 0 else 1 - 0.14
                         all_money += float(self.money) + money * float(self.win_odd) * default_water
         return all_money
 
