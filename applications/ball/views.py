@@ -72,7 +72,7 @@ def bet(request):
             game.win_id = game.other_team.id
             user_choice_team_id = game.other_team.id
             game_stat.other_win_people += 1
-            game_stat.other_win_money += 1
+            game_stat.other_win_money += money
         game_stat.save()
         logger.debug(u"用户%s 在 比赛%s 中压%s元, %s胜利!" % (user.username, game_id, money, user_choice))
 
