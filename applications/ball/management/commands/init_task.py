@@ -24,9 +24,10 @@ class Command(BaseCommand):
             other_money = 0
             user_games = UserGameShip.objects.filter(game_id=game.id)
             for game_item in user_games:
+
                 print("init usergame %s" % game_item.id)
                 if game_item.user_choice_team == game.host_team_id:
-                    # 主队
+                    # 主队i
                     host_win_people += 1
                     host_money += game_item.money
                 elif game_item.user_choice_team == game.other_team_id:
