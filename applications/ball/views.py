@@ -116,8 +116,21 @@ def user_odd(request):
     data = request.GET
     user_id = data.get("user_id")
     user = User.objects.get(id=user_id)
+    filter_type = data.get("filter_type", "all")    # just for all: 所有  checked: 已经结算 unchecked: 未结算
     user_games = UserGameShip.objects.filter(user_id=user.id)
-    user_games = [ user_game.to_json() for user_game in user_games]
+    user_games_list = []
+    if filter_type == "all":
+        user_games_list_tmp = [user_game.to_json() for user_game in user_games]
+        user_games_list = user_games_list_tmp
+    elif filter_type == "checked":
+        for user_game in user_games:
+            if user_game.is_check:
+                user_games_list.append(user_game.to_json())
+    else:
+        for user_game in user_games:
+            if not user_game.is_check:
+                user_games_list.append(user_game.to_json())
+
     game_stats_list = []
     if user.is_superuser:
         game_stats = GameStat.objects.all()
@@ -125,7 +138,7 @@ def user_odd(request):
             game_stats_list.append(game_stat.to_json())
 
     data = {
-        "games": user_games,
+        "games": user_games_list,
         "stats": game_stats_list,
         "is_super": "yes" if user.is_superuser else "no",
         "username": user.username,
