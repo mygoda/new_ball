@@ -215,6 +215,23 @@ class UserGameShip(models.Model):
     def __unicode__(self):
         return self.user.username
 
+
+    @property
+    def goal_list(self):
+        """
+            查看让球让球
+        :return:
+        """
+        if self.extra_goal:
+            extra_goal_list = self.extra_goal.split(",")
+            if len(extra_goal_list) == 2:
+                return "%s%s/%s球" % ("让" if float(extra_goal_list[0]) > 0 else "受", abs(float(extra_goal_list[0])),
+                                     abs(float(extra_goal_list[1])))
+            else:
+                return "%s%s球" % ("让" if float(extra_goal_list[0]) > 0 else "受", abs(float(extra_goal_list[0])))
+        else:
+            return u"无"
+
     @property
     def user_win(self):
         """
@@ -311,6 +328,10 @@ class UserGameShip(models.Model):
         return all_money
 
     @property
+    def money_and_goal(self):
+        return "%s 盘口:%s" % (self.money, self.goal_list)
+
+    @property
     def oh_money(self):
         """
             庄家的钱
@@ -341,7 +362,7 @@ class UserGameShip(models.Model):
             "success": self.game.success,
             "user_team": self.choice_team if self.user_choice_team else "平局",
             "win_add": self.win_odd,
-            "money": self.money,
+            "money": self.money_and_goal,
             "game_status": self.game.win_team_name,
             "got_money": self.user_get_money,
         }
