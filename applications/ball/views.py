@@ -41,6 +41,11 @@ def bet(request):
         if not game.can_add or not game.user_can_odd:
             # 无法下注的情况, 比赛已经开始, 不能下注
             return json_forbidden_response(json_data={}, msg="time_over")
+
+        if not UserGameShip.can_start_bet(user_id=user_id, game_id=game_id):
+            logger.info("user:%s can not bet that bet is more than 500 in %s" % (user_id, game_id))
+            return json_error_response(json_data={}, msg="can not bet")
+
         game_stat_exists = GameStat.objects.filter(game_id=game_id).exists()
         if not game_stat_exists:
             # 不存在
@@ -210,6 +215,15 @@ def login(request):
         logger.info("login ucenter catch error%s" % traceback.format_exc())
         msg = u"login when catch error"
         return json_error_response(msg=msg, json_data={})
+
+
+def test_test(request):
+
+    data = {"data": request.POST}
+    data = json.loads(request.body)
+    print(type(data.get("c")))
+    #print(json.loads(request.POST.get("is_host")))
+    return json_success_response(json_data=data)
 
 
 

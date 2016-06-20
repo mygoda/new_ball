@@ -232,6 +232,23 @@ class UserGameShip(models.Model):
         else:
             return u"无"
 
+    @classmethod
+    def can_start_bet(cls, user_id, game_id):
+        """
+            能否继续下注
+        :return:
+        """
+        all_bet = 0
+        user_game_money = UserGameShip.objects.filter(user_id=user_id, game_id=game_id).values_list("money", flat=True)
+        for money in user_game_money:
+            all_bet += money
+
+        if all_bet > 500:
+            return False
+
+        return True
+
+
     @property
     def user_win(self):
         """
