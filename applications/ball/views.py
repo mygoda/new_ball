@@ -44,7 +44,7 @@ def bet(request):
 
         if not UserGameShip.can_start_bet(user_id=user_id, game_id=game_id):
             logger.info("user:%s can not bet that bet is more than 500 in %s" % (user_id, game_id))
-            return json_error_response(json_data={}, msg="can not bet")
+            return json_forbidden_response(json_data={}, msg="can not bet")
 
         game_stat_exists = GameStat.objects.filter(game_id=game_id).exists()
         if not game_stat_exists:
