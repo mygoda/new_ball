@@ -136,18 +136,32 @@ def user_odd(request):
             if not user_game.is_check:
                 user_games_list.append(user_game.to_json())
 
+    all_money = 0
+
     game_stats_list = []
+    is_quning = False
     if user.is_superuser:
         game_stats = GameStat.objects.all()
         for game_stat in game_stats:
             game_stats_list.append(game_stat.to_json())
+
+    if user.username == "ning.qu":
+        # 庄家信息
+        is_quning = True
+        users_money = list(User.objects.all().values_list("money", flat=True))
+        for user_money in users_money:
+            if user_money < 0:
+                all_money += abs(user_money)
+            elif user_money > 0:
+                all_money -= abs(user_money)
+
 
     data = {
         "games": user_games_list,
         "stats": game_stats_list,
         "is_super": "yes" if user.is_superuser else "no",
         "username": user.username,
-        "money": user.money,
+        "money": user.money if not is_quning else all_money,
     }
 
     return json_success_response(json_data=data)
