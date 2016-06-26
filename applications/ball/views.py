@@ -240,6 +240,197 @@ def test_test(request):
     return json_success_response(json_data=data)
 
 
+def user_stat(request):
+    """
+        用户的统计信息, 庄家显示
+    :param request:
+    :return:
+    """
+    data = request.GET
+
+    user_id = int(data.get("user_id"))
+    if user_id != 23:
+
+        show_name = True
+
+        users = User.objects.all().order_by("-money")
+        order_ids = list(users.values_list("id", flat=True))
+
+        user_index = order_ids.index(user_id)   # 排名 需要加一
+
+        user = users.get(id=user_id)    # 此用户
+
+        previous_user_info = "没有人比你更爽"
+
+        if user_index != 0:
+            previous_index = user_index - 1
+
+            previous_user = users[previous_index]
+
+            previous_user_info = previous_user.username
+
+        next_user_info = "没有人比你更惨"
+
+        if user_index != len(order_ids) - 1:
+            next_index = user_index + 1
+
+            next_user = users[next_index]
+
+            next_user_info = next_user.username
+
+        max_user = users.first()
+
+        min_user = users.last()
+
+        all_game_ship = UserGameShip.objects.filter(user_id=user_id)
+
+        game_ship_count = len(set(all_game_ship.values_list("game_id", flat=True)))
+
+        game_sum = sum(list(all_game_ship.values_list("money", flat=True)))
+
+        gives = ForAdmin.objects.filter(user_id=user_id)
+
+        gives_sum = sum(list(gives.values_list("money", flat=True)))
+
+        return_data = {
+            "username": user.username,
+            "user_index": user_index + 1,
+            "previous_user": previous_user_info if show_name else "*****",
+            "next_user": next_user_info if show_name else "*****",
+            "max_user_name": max_user.username if show_name else "*****",
+            "min_user_name": min_user.username if show_name else "*****",
+            "my_money": user.money,
+            "game_count": game_ship_count,
+            "game_money": game_sum,
+            "give_sum": gives_sum
+
+        }
+        return json_success_response(json_data=return_data)
+
+
+def admin_stat(request):
+    """
+        ning.qu 独享
+    :param request:
+    :return:
+    """
+    # qu.ning 独享
+
+    users_ship = UserGameShip.objects.all()
+
+    user_all_money = sum(list(users_ship.values_list("money", flat=True)))  # 总下注额度
+
+    game_count = Game.objects.all().count()
+
+    users_ship_count = users_ship.count()   # 下注数量
+
+    user_count = len(set(users_ship.values_list("user_id", flat=True))) # 下注的人数
+
+    users = User.objects.all().order_by("-money")
+
+    max_user = users.first()    # 赢钱最多
+
+    min_user = users.last()     # 输钱最多
+
+    water_sum, all_my_sum = GameStat.all_my_water_sum()
+
+    max_win, min_win = GameStat.max_min_win()
+
+    max_win_money = max_win.all_my
+
+    max_win_game = max_win.game.game_name
+
+    min_win_money = min_win.all_my
+
+    min_win_game = min_win.game.game_name
+
+    all_admins = ForAdmin.objects.all()
+
+    give_sum = sum(list(all_admins.values_list("money", flat=True)))
+
+    give_people_count = all_admins.count()
+
+    max_user_info = "%s 收益: %s" % (max_user.username, max_user.money)
+
+    min_user_info = "%s 收益: %s" % (min_user.username, min_user.money)
+
+    max_game_win = "%s 收益: %s" % (max_win_game, max_win_money)
+
+    min_game_win = "%s 收益: %s" % (min_win_game, min_win_money)
+
+    super_win = all_my_sum - water_sum + give_sum
+
+    return_data = {
+        "user_all_money": user_all_money,
+        "users_ship_count": users_ship_count,
+        "user_count": user_count,
+        "max_user_info": max_user_info,
+        "min_user_info": min_user_info,
+        "max_game_win": max_game_win,
+        "min_game_win": min_game_win,
+        "give_sum": give_sum,
+        "give_people_count": give_people_count,
+        "game_count": game_count,
+        "water_sum": water_sum,
+        "all_my_sum": round(all_my_sum, 2),
+        "super_win": round(super_win),
+    }
+
+    return json_success_response(json_data=return_data)
+
+
+def for_admin_list(request):
+    """
+        打赏榜
+    :param request:
+    :return:
+    """
+
+    for_admins = ForAdmin.objects.all()
+    admin_json = [admin.to_json() for admin in for_admins]
+    return json_success_response(json_data=admin_json)
+
+
+def give_admin(request):
+    """
+        打赏
+    :param request:
+    :return:
+    """
+
+    data = request.POST
+
+    user_id = data.get("user_id")
+
+    money = abs(float(data.get("money", 10)))
+
+    if money < 10:
+        money = 10
+    elif money > 500:
+        money = 500
+
+    give = ForAdmin(user_id=user_id, money=money)
+    give.save()
+
+    user = User.objects.get(id=user_id)
+    user.money -= money
+    user.save()
+
+    logger.info("user:%s give for quning money:%s" % (user_id, money))
+    return json_success_response(json_data={})
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

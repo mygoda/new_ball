@@ -69,6 +69,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __unicode__(self):
         return self.get_full_name()
 
+    @property
+    def test(self):
+        return self.username
+
     @classmethod
     def get_user_by_phone(cls, phone):
         users = User.objects.filter(phone=phone)
