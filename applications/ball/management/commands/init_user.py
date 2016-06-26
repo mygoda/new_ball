@@ -51,7 +51,7 @@ class Command(BaseCommand):
                             game_stat.equal_win_add = 0
                             game_stat.save()
                         game_stat.all_my -= user_game.oh_money
-                        game_stat.equal_win_add += user_water   # 水钱
+
                     print(game_stat.all_my)
                     print("user:%s is not win oh my is:%s" % (user.username, user_game.oh_money))
                 user_game.is_check = True
