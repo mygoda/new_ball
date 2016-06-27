@@ -141,7 +141,8 @@ def user_odd(request):
     game_stats_list = []
     is_quning = False
     if user.is_superuser:
-        game_stats = GameStat.objects.all()
+        game_stats = GameStat.objects.all().order_by("-id")
+        print(game_stats[0].id)
         for game_stat in game_stats:
             game_stats_list.append(game_stat.to_json())
 
