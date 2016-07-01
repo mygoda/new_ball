@@ -42,7 +42,7 @@ def bet(request):
             # 无法下注的情况, 比赛已经开始, 不能下注
             return json_forbidden_response(json_data={}, msg="time_over")
 
-        if not UserGameShip.can_start_bet(user_id=user_id, game_id=game_id):
+        if not UserGameShip.can_start_bet(user_id=user_id, game_id=game_id, money=money):
             logger.info("user:%s can not bet that bet is more than 500 in %s" % (user_id, game_id))
             return json_forbidden_response(json_data={}, msg="can not bet")
 
