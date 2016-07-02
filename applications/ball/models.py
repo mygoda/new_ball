@@ -215,7 +215,6 @@ class UserGameShip(models.Model):
     def __unicode__(self):
         return self.user.username
 
-
     @property
     def goal_list(self):
         """
@@ -225,12 +224,30 @@ class UserGameShip(models.Model):
         if self.extra_goal:
             extra_goal_list = self.extra_goal.split(",")
             if len(extra_goal_list) == 2:
-                return "%s%s/%s球" % ("让" if float(extra_goal_list[0]) > 0 else "受", abs(float(extra_goal_list[0])),
+                return "%s%s/%s球" % ("让" if float(extra_goal_list[0]) > 0 or float(extra_goal_list[0]) == 0 else "受",
+                                     abs(float(extra_goal_list[0])),
                                      abs(float(extra_goal_list[1])))
             else:
-                return "%s%s球" % ("让" if float(extra_goal_list[0]) > 0 else "受", abs(float(extra_goal_list[0])))
+                return "%s%s球" % ("让" if float(extra_goal_list[0]) > 0 or float(extra_goal_list[0]) == 0 else "受",
+                                  abs(float(extra_goal_list[0])))
         else:
             return u"无"
+
+    # @property
+    # def goal_list(self):
+    #     """
+    #         查看让球让球
+    #     :return:
+    #     """
+    #     if self.extra_goal:
+    #         extra_goal_list = self.extra_goal.split(",")
+    #         if len(extra_goal_list) == 2:
+    #             return "%s%s/%s球" % ("让" if float(extra_goal_list[0]) > 0 else "受", abs(float(extra_goal_list[0])),
+    #                                  abs(float(extra_goal_list[1])))
+    #         else:
+    #             return "%s%s球" % ("让" if float(extra_goal_list[0]) > 0 else "受", abs(float(extra_goal_list[0])))
+    #     else:
+    #         return u"无"
 
     @classmethod
     def can_start_bet(cls, user_id, game_id, money):
