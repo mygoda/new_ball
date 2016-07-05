@@ -38,11 +38,17 @@ def bet(request):
         user = User.objects.get(id=user_id)
         user_choice = int(data.get("is_host", 0))   # 0: 战平 1: 主队, 2 客队
         game = Game.objects.get(id=game_id)
+        team_id = 0
+        if user_choice == 1:
+            team_id = game.host_team_id
+        else:
+            team_id = game.other_team_id
+
         if not game.can_add or not game.user_can_odd:
             # 无法下注的情况, 比赛已经开始, 不能下注
             return json_forbidden_response(json_data={}, msg="time_over")
 
-        if not UserGameShip.can_start_bet(user_id=user_id, game_id=game_id, money=money):
+        if not UserGameShip.can_start_bet(user_id=user_id, game_id=game_id, money=money, team_id=team_id):
             logger.info("user:%s can not bet that bet is more than 500 in %s" % (user_id, game_id))
             return json_forbidden_response(json_data={}, msg="can not bet")
 
@@ -454,7 +460,7 @@ def add_gold(request):
 
     all_money = sum(list(ChampionModel.objects.filter(user_id=user_id).values_list("money", flat=True))) + money
 
-    if all_money > 1000:
+    if all_money > 2000:
         return json_error_response(json_data={}, msg="超过下注金额,无法下注")
 
     gold = GoldGame.objects.get(id=gold_id)
