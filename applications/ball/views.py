@@ -467,6 +467,10 @@ def add_gold(request):
 
     c_model.save()
 
+    user = User.objects.get(id=user_id)
+    user.money -= money
+    user.save()
+
     return json_success_response(json_data={})
 
 
