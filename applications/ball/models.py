@@ -581,7 +581,7 @@ class ForAdmin(models.Model):
         """
         return {
             "id": self.id,
-            "user_name": self.user.username,
+            "user_name": self.user.username if self.user else "",
             "money": self.money
         }
 
