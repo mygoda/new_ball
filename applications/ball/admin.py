@@ -29,7 +29,17 @@ def delete_user_for(modeladmin, request, queryset):
         user.money += item.money
         user.save()
         item.delete()
-delete_user_game.short_description = u"清楚所选用户打赏记录"
+delete_user_for.short_description = u"清楚所选用户打赏记录"
+
+
+def delete_user_c(modeladmin, request, queryset):
+    for item in queryset:
+        user = item.user
+        user.money += item.money
+        user.save()
+        item.delete()
+delete_user_c.short_description = u"清楚所选用户冠军下注记录"
+
 
 #
 # def update_user_money(modeladmin, request, queryset):
@@ -129,6 +139,8 @@ class GoldAdmin(admin.ModelAdmin):
 class ChamAdmin(admin.ModelAdmin):
 
     list_display = ["username", "gold_team_name", "user_choice_team", "money"]
+
+    actions = [delete_user_c]
 
     def username(self, obj):
         return obj.user.username if obj.user else ""
