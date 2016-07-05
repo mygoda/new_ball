@@ -111,7 +111,7 @@ class ForModelAdmin(admin.ModelAdmin):
     actions = [delete_user_for]
 
     def username(self, obj):
-        return obj.user.username
+        return obj.user.username if obj.user else ""
 
     username.short_description = u"打赏人"
 
@@ -131,7 +131,7 @@ class ChamAdmin(admin.ModelAdmin):
     list_display = ["username", "gold_team_name", "user_choice_team", "money"]
 
     def username(self, obj):
-        return obj.user.username
+        return obj.user.username if obj.user else ""
 
     username.short_description = u"投注人"
 
