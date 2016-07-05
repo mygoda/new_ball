@@ -3,7 +3,7 @@
 
 from __future__ import division, unicode_literals, print_function
 from django.contrib import admin
-from applications.ball.models import Team, Game, UserGameShip, GameStat
+from applications.ball.models import Team, Game, UserGameShip, GameStat, ForAdmin, GoldGame, ChampionModel
 import datetime
 
 
@@ -21,6 +21,15 @@ def delete_user_game(modeladmin, request, queryset):
         user.save()
         item.delete()
 delete_user_game.short_description = u"清楚所选用户下注记录"
+
+
+def delete_user_for(modeladmin, request, queryset):
+    for item in queryset:
+        user = item.user
+        user.money += item.money
+        user.save()
+        item.delete()
+delete_user_game.short_description = u"清楚所选用户打赏记录"
 
 #
 # def update_user_money(modeladmin, request, queryset):
@@ -95,7 +104,46 @@ class StatAdmin(admin.ModelAdmin):
     game_name.short_description = u"比赛名称"
 
 
+class ForModelAdmin(admin.ModelAdmin):
+
+    list_display = ["username", "money"]
+
+    actions = [delete_user_for]
+
+    def username(self, obj):
+        return obj.user.username
+
+    username.short_description = u"打赏人"
+
+
+class GoldAdmin(admin.ModelAdmin):
+
+    list_display = ["team_name", "win_odd", "is_gold", "created_at"]
+
+    def team_name(self, obj):
+        return obj.team.name
+
+    team_name.short_description = u"球队"
+
+
+class ChamAdmin(admin.ModelAdmin):
+
+    list_display = ["username", "gold_team_name", "user_choice_team", "money"]
+
+    def username(self, obj):
+        return obj.user.username
+
+    username.short_description = u"投注人"
+
+    def gold_team_name(self, obj):
+        return obj.gold_game.team.name
+
+    gold_team_name.short_description = u"冠军球队"
+
 admin.site.register(Team, TeamAdmin)
 admin.site.register(GameStat, StatAdmin)
 admin.site.register(Game, GameAdmin)
 admin.site.register(UserGameShip, UserGameShipAdmin)
+admin.site.register(ForAdmin, ForModelAdmin)
+admin.site.register(GoldGame, GoldAdmin)
+admin.site.register(ChampionModel, ChamAdmin)

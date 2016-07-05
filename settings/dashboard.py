@@ -30,7 +30,11 @@ class CustomIndexDashboard(Dashboard):
                 'applications.ball.models.Team',
                 'applications.ball.models.Game',
                 'applications.ball.models.UserGameShip',
-                'applications.ball.models.GameStat'
+                'applications.ball.models.GameStat',
+                'applications.ball.models.ForAdmin',
+                'applications.ball.models.GoldGame',
+                'applications.ball.models.ChampionModel',
+
             )
         ))
 

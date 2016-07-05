@@ -260,7 +260,7 @@ class UserGameShip(models.Model):
         for money in user_game_money:
             all_bet += money
 
-        if all_bet > 500 or all_bet == 500:
+        if all_bet > 1000 or all_bet == 1000:
             return False
 
         return True
@@ -584,3 +584,73 @@ class ForAdmin(models.Model):
             "user_name": self.user.username,
             "money": self.money
         }
+
+
+class GoldGame(models.Model):
+    class Meta:
+        app_label = "ball"
+        db_table = "ball_gold"
+        verbose_name_plural = verbose_name = u"冠军球队"
+
+    team = models.ForeignKey(Team, verbose_name=u"球队", null=True, blank=True)
+
+    win_odd = models.FloatField(u"赔率", null=True, blank=True, default=0.0)
+
+    is_gold = models.BooleanField(u"是否冠军", default=False)
+
+    end_at = models.DateTimeField(u"结束时间", default=datetime.datetime.now)
+
+    created_at = models.DateTimeField(u"创建时间", default=datetime.datetime.now)
+    update_at = models.DateTimeField(u"更新时间", default=datetime.datetime.now)
+
+    def __unicode__(self):
+        return self.team.name
+
+    def to_json(self):
+        """
+            to json
+        """
+        return {
+            "id": self.id,
+            "team_id": self.team.id,
+            "win_odd": self.win_odd,
+            "name": "%s 赔率:%s" % (self.team.name, self.win_odd)
+        }
+
+    @property
+    def can_add(self):
+        """
+            是否可以下注
+        :return:
+        """
+        now = datetime.datetime.now()
+        now = now.replace(tzinfo=pytz.timezone("Asia/Shanghai"))
+        if now > self.end_at:
+            # 只要下注时间超过开球时间就不允许
+            return False
+        return True
+
+
+class ChampionModel(models.Model):
+    class Meta:
+        app_label = "ball"
+        db_table = "ball_champion"
+        verbose_name_plural = verbose_name = u"冠军下注"
+
+    user = models.ForeignKey(auth_user_model, verbose_name=u"下注人", null=True, blank=True)
+
+    gold_game = models.ForeignKey(GoldGame, verbose_name=u"冠军球队", null=True, blank=True)
+
+    money = models.FloatField(u"下注金额", null=True, blank=True)
+
+    user_choice_team = models.IntegerField(u"球队id", default=0)
+
+    is_checked = models.BooleanField(u"是否结算", default=False)
+
+    win_odd = models.FloatField(u"赔率", null=True, blank=True)
+
+    created_at = models.DateTimeField(u"创建时间", default=datetime.datetime.now)
+    update_at = models.DateTimeField(u"更新时间", default=datetime.datetime.now)
+
+    def __unicode__(self):
+        return self.user.username

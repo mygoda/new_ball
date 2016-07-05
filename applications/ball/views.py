@@ -252,7 +252,7 @@ def user_stat(request):
     if user_id != 23:
 
         show_name = True
-
+        c_sum = sum(list(ChampionModel.objects.filter(user_id=user_id).values_list("money", flat=True)))
         users = User.objects.all().order_by("-money")
         order_ids = list(users.values_list("id", flat=True))
 
@@ -302,7 +302,8 @@ def user_stat(request):
             "my_money": user.money,
             "game_count": game_ship_count,
             "game_money": game_sum,
-            "give_sum": gives_sum
+            "give_sum": gives_sum,
+            "c_sum": c_sum,
 
         }
         return json_success_response(json_data=return_data)
@@ -315,6 +316,10 @@ def admin_stat(request):
     :return:
     """
     # qu.ning 独享
+
+    c_sum = 0   # 冠军投注收益
+
+    c_sum = sum(list(ChampionModel.objects.all().values_list("money", flat=True)))
 
     users_ship = UserGameShip.objects.all()
 
@@ -374,6 +379,7 @@ def admin_stat(request):
         "water_sum": water_sum,
         "all_my_sum": round(all_my_sum, 2),
         "super_win": round(super_win),
+        "c_sum": c_sum,
     }
 
     return json_success_response(json_data=return_data)
@@ -386,7 +392,7 @@ def for_admin_list(request):
     :return:
     """
 
-    for_admins = ForAdmin.objects.all()
+    for_admins = ForAdmin.objects.all().order_by("-money")
     admin_json = [admin.to_json() for admin in for_admins]
     return json_success_response(json_data=admin_json)
 
@@ -420,7 +426,48 @@ def give_admin(request):
     return json_success_response(json_data={})
 
 
+def gold_list(request):
+    """
+        押注冠军数组
+    """
 
+    golds = GoldGame.objects.all()
+    game_list_json = [gold.to_json() for gold in golds]
+    logger.info("this game is %s" % game_list_json)
+    return json_success_response(json_data=game_list_json)
+
+
+def add_gold(request):
+
+    data = request.POST
+
+    money = data.get("money")
+
+    money = abs(float(money))
+
+    user_id = data.get("user_id")
+
+    gold_id = data.get("gold_id")
+
+    if not user_id:
+        return json_error_response(json_data={}, msg="下注失败,未登录")
+
+    all_money = sum(list(ChampionModel.objects.filter(user_id=user_id).values_list("money", flat=True))) + money
+
+    if all_money > 1000:
+        return json_error_response(json_data={}, msg="超过下注金额,无法下注")
+
+    gold = GoldGame.objects.get(id=gold_id)
+
+    if not gold.can_add:
+        return json_error_response(json_data={}, msg="超过下注时间,无法下注")
+
+    c_model = ChampionModel(user_id=user_id, gold_game_id=gold_id, money=money, user_choice_team=gold.team_id,
+                            win_odd=gold.win_odd)
+
+    c_model.save()
+
+    return json_success_response(json_data={})
 
 
 
