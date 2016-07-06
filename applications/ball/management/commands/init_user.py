@@ -22,6 +22,10 @@ class Command(BaseCommand):
             user_money = 0
             user_win_money = 0
             user_games = UserGameShip.objects.filter(user_id=user.id)
+            user_money -= sum(list(ForAdmin.objects.filter(user_id=user.id).values_list("money", flat=True)))
+            print("user for admin %s" % user_money)
+            user_money -= sum(list(ChampionModel.objects.filter(user_id=user.id).values_list("money", flat=True)))
+            print("user for gold is %s and for admin sum " % user_money)
             for user_game in user_games:
 
                 game_stat = GameStat.objects.get(game_id=user_game.game.id)
