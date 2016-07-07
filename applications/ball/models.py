@@ -669,5 +669,5 @@ class ChampionModel(models.Model):
             "win_add": self.win_odd,
             "money": self.money,
             "game_status": "冠军" if self.gold_game.is_gold else "非冠军",
-            "got_money": self.user_get_money,
+            "got_money": 0,
         }
