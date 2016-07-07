@@ -655,3 +655,19 @@ class ChampionModel(models.Model):
 
     def __unicode__(self):
         return self.user.username
+
+    def user_get_money(self):
+        return 0
+
+    def to_json(self):
+        return {
+            "id": self.id,
+            "name": "冠军投注",
+            "game_name": "冠军投注",
+            "success": "冠军" if self.gold_game.is_gold else "非冠军",
+            "user_team": "冠军: %s" % self.gold_game.team.name,
+            "win_add": self.win_odd,
+            "money": self.money,
+            "game_status": "冠军" if self.gold_game.is_gold else "非冠军",
+            "got_money": self.user_get_money,
+        }

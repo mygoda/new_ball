@@ -132,15 +132,24 @@ def user_odd(request):
     user_games_list = []
     if filter_type == "all":
         user_games_list_tmp = [user_game.to_json() for user_game in user_games]
+        c_game_list = ChampionModel.objects.filter(user_id=user_id)
+        for c in c_game_list:
+            user_games_list_tmp.append(c.to_json())
         user_games_list = user_games_list_tmp
     elif filter_type == "checked":
         for user_game in user_games:
             if user_game.is_check:
                 user_games_list.append(user_game.to_json())
+        c_game_list = ChampionModel.objects.filter(user_id=user_id, is_checked=True)
+        for c in c_game_list:
+            user_games_list.append(c.to_json())
     else:
         for user_game in user_games:
             if not user_game.is_check:
                 user_games_list.append(user_game.to_json())
+            c_game_list = ChampionModel.objects.filter(user_id=user_id, is_checked=False)
+            for c in c_game_list:
+                user_games_list.append(c.to_json())
 
     all_money = 0
 
