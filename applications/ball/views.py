@@ -176,7 +176,7 @@ def user_odd(request):
         "stats": game_stats_list,
         "is_super": "yes" if user.is_superuser else "no",
         "username": user.username,
-        "money": user.money if not is_quning else all_money,
+        "money": user.money,
     }
 
     return json_success_response(json_data=data)

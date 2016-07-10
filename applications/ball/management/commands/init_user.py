@@ -17,15 +17,29 @@ class Command(BaseCommand):
 
         game_stat_list = []
 
+        quning = User.objects.get(id=23)
+
         for user in users:
             print("user:%s check" % user.username)
             user_money = 0
             user_win_money = 0
             user_games = UserGameShip.objects.filter(user_id=user.id)
-            user_money -= sum(list(ForAdmin.objects.filter(user_id=user.id).values_list("money", flat=True)))
+            for_admin_sum = sum(list(ForAdmin.objects.filter(user_id=user.id).values_list("money", flat=True)))
+            user_money -= for_admin_sum
+            quning.money += for_admin_sum
             print("user for admin %s" % user_money)
-            user_money -= sum(list(ChampionModel.objects.filter(user_id=user.id).values_list("money", flat=True)))
-            print("user for gold is %s and for admin sum " % user_money)
+            c_games = ChampionModel.objects.filter(user_id=user.id)
+            for c_game in c_games:
+                # get use c money
+                user_money -= c_game.money
+                game_money = c_game.get_money()
+                if game_money > 0:
+                    # 赢钱
+                    user_win_money += game_money
+                    quning.money -= game_money - c_game.money
+                else:
+                    quning.money -= game_money
+
             for user_game in user_games:
 
                 game_stat = GameStat.objects.get(game_id=user_game.game.id)
@@ -44,6 +58,7 @@ class Command(BaseCommand):
                             game_stat.equal_win_add = 0
                             game_stat.save()
                         game_stat.all_my -= user_game.oh_money
+                        quning.money -= user_game.oh_money
                         game_stat.equal_win_add += user_water   # 水钱
                     user_win_money += now_user_win
 
@@ -55,6 +70,7 @@ class Command(BaseCommand):
                             game_stat.equal_win_add = 0
                             game_stat.save()
                         game_stat.all_my -= user_game.oh_money
+                        quning.money -= user_game.oh_money
 
                     print(game_stat.all_my)
                     print("user:%s is not win oh my is:%s" % (user.username, user_game.oh_money))
@@ -66,10 +82,11 @@ class Command(BaseCommand):
             user.save()
             print(user.money)
             user.money += user_win_money
-            give_money = ForAdmin.objects.filter(user_id=user.id).values_list("money", flat=True)
-            give_money_sum = sum(list(give_money))
-            print("user:%s has give admin money:%s" % (user.username, give_money_sum))
-            user.money -= give_money_sum
+            # give_money = ForAdmin.objects.filter(user_id=user.id).values_list("money", flat=True)
+            # give_money_sum = sum(list(give_money))
+            # print("user:%s has give admin money:%s" % (user.username, give_money_sum))
+            # user.money -= give_money_sum
             user.save()
+            quning.save()
 
 
