@@ -21,7 +21,7 @@ class Command(BaseCommand):
         for user in users:
             if user.id == 23:
                 continue
-
+            print(user.money)
             sum += user.money
 
         print("sum is %s" % sum)
